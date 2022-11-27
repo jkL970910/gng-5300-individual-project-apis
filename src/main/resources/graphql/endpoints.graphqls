@@ -1,0 +1,33 @@
+type Query {
+    getAllUser: [User]
+    getAllPhotos: [Photo]
+    getUserByUsername(username: String!): User
+}
+
+type Mutation {
+    addNewUser(username: String, password: String): User
+    addPhoto(title: String!, description: String!, uploadedUser: String!, imgBase64: String!): Photo
+    likePhoto(username: String!, photoTitle: String!): User
+    unLikePhoto(username: String!, photoTitle: String!): User
+    uploadPhoto(username: String! , photoTitle: String! , description: String! , imgUrl: String! , imgLocal: String! ): Photo
+    findPhotoByID(id: String!): Photo
+    findPhotoByTitle(title: String!): Photo
+    findPhotoByUploadUser(username: String!): Photo
+}
+
+type User {
+    id: ID
+    username: String
+    password: String
+    myPhotos: [String]
+    likedList: [String]
+}
+
+type Photo {
+    id: ID
+    title: String
+    description: String
+    uploadUser: String
+    imgUrl: String
+    imgLocal: String
+}
