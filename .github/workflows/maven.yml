@@ -30,4 +30,4 @@ jobs:
     - name: Build with Maven
       run: mvn -B package --file pom.xml
     - name: Execute Jar File
-      run: sudo kill -9 `sudo lsof -t -i:80` & sudo java -jar /home/ubuntu/actions-runner/_work/gng-5300-individual-project-apis/gng-5300-individual-project-apis/target/individualprojectapis-0.0.1-SNAPSHOT.jar &
+      run: sudo kill -9 `sudo lsof -t` & sudo java -jar /home/ubuntu/actions-runner/_work/gng-5300-individual-project-apis/gng-5300-individual-project-apis/target/individualprojectapis-0.0.1-SNAPSHOT.jar &
