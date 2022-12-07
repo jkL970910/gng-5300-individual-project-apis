@@ -24,6 +24,11 @@ public class UserController {
     }
 
     @QueryMapping
+    public User userLogin(@Argument String username, @Argument String password) {
+        return userService.userLogin(username, password);
+    }
+
+    @QueryMapping
     public User getUserByUsername(@Argument String username) {
         return userService.findUserByUsername(username);
     }

@@ -63,4 +63,14 @@ public class UserService {
             throw new RuntimeException(e);
         }
     }
+
+    public User userLogin(String username, String password) {
+        try {
+            User user = userRepository.findByUsername(username).get(0);
+            if (user.getPassword().equals(password)) return user;
+            return new User("UsernameOrPasswordNotMatched", password, new HashSet<>(), new HashSet<>());
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
 }

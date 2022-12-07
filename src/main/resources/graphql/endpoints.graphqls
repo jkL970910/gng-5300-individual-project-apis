@@ -2,6 +2,7 @@ type Query {
     getAllUser: [User]
     getAllPhotos: [Photo]
     getUserByUsername(username: String!): User
+    userLogin(username: String!, password: String!): User
 }
 
 type Mutation {
