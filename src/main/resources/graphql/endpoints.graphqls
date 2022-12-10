@@ -7,10 +7,10 @@ type Query {
 
 type Mutation {
     addNewUser(username: String, password: String): User
-    addPhoto(title: String!, description: String!, uploadedUser: String!, imgBase64: String!): Photo
     likePhoto(username: String!, photoTitle: String!): User
     unLikePhoto(username: String!, photoTitle: String!): User
     uploadPhoto(username: String! , photoTitle: String! , description: String! , imgUrl: String! , imgLocal: String! ): Photo
+    updatePhoto(photoId: String! , photoTitle: String! , description: String! , imgUrl: String! , imgLocal: String! ): Photo
     findPhotoByID(id: String!): Photo
     findPhotoByTitle(title: String!): Photo
     findPhotoByUploadUser(username: String!): Photo

@@ -27,12 +27,30 @@ public class PhotoService {
             photoRepository.save(newPhoto);
             User user = userRepository.findByUsername(username).get(0);
             HashSet<String> currentPhotos = user.getMyPhotos();
-            currentPhotos.add(photoTitle);
+            currentPhotos.add(newPhoto.getId());
             user.setMyPhotos(currentPhotos);
             userRepository.save(user);
             return newPhoto;
         } catch (Exception e) {
-            return new Photo("Create Photo Error", e.toString(), username, imgUrl, imgLocal);
+            return new Photo("Update Photo Error", e.toString(), username, imgUrl, imgLocal);
+        }
+    }
+
+    public Photo updatePhoto(String photoId, String photoTitle, String description, String imgUrl, String imgLocal) {
+        try {
+            Photo updatePhoto = findPhotoByID(photoId);
+            if (updatePhoto != null) {
+                updatePhoto.setDescription(description);
+                updatePhoto.setTitle(photoTitle);
+                updatePhoto.setImgUrl(imgUrl);
+                updatePhoto.setImgLocal(imgLocal);
+                photoRepository.save(updatePhoto);
+                return updatePhoto;
+            }
+
+            return new Photo("Update Photo Error", "", "", imgUrl, imgLocal);
+        } catch (Exception e) {
+            return new Photo("Update Photo Error", e.toString(), "", imgUrl, imgLocal);
         }
     }
 
