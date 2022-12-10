@@ -32,7 +32,7 @@ public class PhotoService {
             userRepository.save(user);
             return newPhoto;
         } catch (Exception e) {
-            throw new RuntimeException(e);
+            return new Photo("Create Photo Error", e.toString(), username, imgUrl, imgLocal);
         }
     }
 
