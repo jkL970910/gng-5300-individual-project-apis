@@ -1,14 +1,15 @@
 type Query {
     getAllUser: [User]
     getAllPhotos: [Photo]
+    getLikePhotoList(username: String!): [Photo]
     getUserByUsername(username: String!): User
     userLogin(username: String!, password: String!): User
 }
 
 type Mutation {
     addNewUser(username: String, password: String): User
-    likePhoto(username: String!, photoTitle: String!): User
-    unLikePhoto(username: String!, photoTitle: String!): User
+    likePhoto(username: String!, photoID: String!): User
+    unLikePhoto(username: String!, photoID: String!): User
     uploadPhoto(username: String! , photoTitle: String! , description: String! , imgUrl: String! , imgLocal: String! ): Photo
     updatePhoto(photoId: String! , photoTitle: String! , description: String! , imgUrl: String! , imgLocal: String! ): Photo
     findPhotoByID(id: String!): Photo

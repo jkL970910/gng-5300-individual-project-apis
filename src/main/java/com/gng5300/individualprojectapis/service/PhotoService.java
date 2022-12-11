@@ -6,6 +6,7 @@ import com.gng5300.individualprojectapis.repository.PhotoRepository;
 import com.gng5300.individualprojectapis.repository.UserRepository;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 
@@ -51,6 +52,47 @@ public class PhotoService {
             return new Photo("Update Photo Error", "", "", imgUrl, imgLocal);
         } catch (Exception e) {
             return new Photo("Update Photo Error", e.toString(), "", imgUrl, imgLocal);
+        }
+    }
+
+    public Photo likePhoto(String username, String photoID) {
+        try {
+            User user = userRepository.findByUsername(username).get(0);
+            HashSet<String> currentLikedList = user.getLikedList();
+            if (!currentLikedList.contains(photoID)) {
+                currentLikedList.add(photoID);
+            }
+            return new Photo("Add to favorite success", "", "", "", "");
+        } catch (Exception e) {
+            return new Photo("Add to favorite Error", e.toString(), "", "", "");
+        }
+    }
+
+    public Photo unLikePhoto(String username, String photoID) {
+        try {
+            User user = userRepository.findByUsername(username).get(0);
+            HashSet<String> currentLikedList = user.getLikedList();
+            if (currentLikedList.contains(photoID)) {
+                currentLikedList.remove(photoID);
+            }
+            return new Photo("Remove to favorite success", "", "", "", "");
+        } catch (Exception e) {
+            return new Photo("Remove to favorite Error", e.toString(), "", "", "");
+        }
+    }
+
+    public List<Photo> getLikePhotoList(String username) {
+        List<Photo> likeList = new ArrayList<>();
+        try {
+            User user = userRepository.findByUsername(username).get(0);
+            HashSet<String> currentLikedList = user.getLikedList();
+            for (String photoID : currentLikedList) {
+                likeList.add(findPhotoByID(photoID));
+            }
+            return likeList;
+        } catch (Exception e) {
+            likeList.add(new Photo("Update Photo Error", e.toString(), "", "", ""));
+            return likeList;
         }
     }
 

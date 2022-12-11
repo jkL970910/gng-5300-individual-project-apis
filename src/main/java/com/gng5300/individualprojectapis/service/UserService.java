@@ -42,12 +42,14 @@ public class UserService {
         try {
             User user = userRepository.findByUsername(username).get(0);
             HashSet<String> curLikedPhotoList = user.getLikedList();
-            curLikedPhotoList.add(photoId);
+            if (!curLikedPhotoList.contains(photoId)) {
+                curLikedPhotoList.add(photoId);
+            }
             user.setLikedList(curLikedPhotoList);
             userRepository.save(user);
             return user;
         } catch (Exception e) {
-            throw new RuntimeException(e);
+            return new User("Like Photo Failed", e.toString(), new HashSet<>(), new HashSet<>());
         }
     }
 
@@ -60,7 +62,7 @@ public class UserService {
             userRepository.save(user);
             return user;
         } catch (Exception e) {
-            throw new RuntimeException(e);
+            return new User("Unlike Photo Failed", e.toString(), new HashSet<>(), new HashSet<>());
         }
     }
 
