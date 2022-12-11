@@ -55,32 +55,6 @@ public class PhotoService {
         }
     }
 
-    public Photo likePhoto(String username, String photoID) {
-        try {
-            User user = userRepository.findByUsername(username).get(0);
-            HashSet<String> currentLikedList = user.getLikedList();
-            if (!currentLikedList.contains(photoID)) {
-                currentLikedList.add(photoID);
-            }
-            return new Photo("Add to favorite success", "", "", "", "");
-        } catch (Exception e) {
-            return new Photo("Add to favorite Error", e.toString(), "", "", "");
-        }
-    }
-
-    public Photo unLikePhoto(String username, String photoID) {
-        try {
-            User user = userRepository.findByUsername(username).get(0);
-            HashSet<String> currentLikedList = user.getLikedList();
-            if (currentLikedList.contains(photoID)) {
-                currentLikedList.remove(photoID);
-            }
-            return new Photo("Remove to favorite success", "", "", "", "");
-        } catch (Exception e) {
-            return new Photo("Remove to favorite Error", e.toString(), "", "", "");
-        }
-    }
-
     public List<Photo> getLikePhotoList(String username) {
         List<Photo> likeList = new ArrayList<>();
         try {

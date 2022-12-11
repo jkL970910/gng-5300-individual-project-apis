@@ -49,7 +49,8 @@ public class UserService {
             userRepository.save(user);
             return user;
         } catch (Exception e) {
-            return new User("Like Photo Failed", e.toString(), new HashSet<>(), new HashSet<>());
+            String error = "Like Photo Failed: " + e;
+            return new User(error, "", new HashSet<>(), new HashSet<>());
         }
     }
 
@@ -62,7 +63,8 @@ public class UserService {
             userRepository.save(user);
             return user;
         } catch (Exception e) {
-            return new User("Unlike Photo Failed", e.toString(), new HashSet<>(), new HashSet<>());
+            String error = "unlike Photo Failed: " + e;
+            return new User(error, "", new HashSet<>(), new HashSet<>());
         }
     }
 
