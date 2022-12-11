@@ -12,6 +12,7 @@ type Mutation {
     unLikePhoto(username: String!, photoID: String!): User
     uploadPhoto(username: String! , photoTitle: String! , description: String! , imgUrl: String! , imgLocal: String! ): Photo
     updatePhoto(photoId: String! , photoTitle: String! , description: String! , imgUrl: String! , imgLocal: String! ): Photo
+    deletePhoto(photoId: String!): Photo
     findPhotoByID(id: String!): Photo
     findPhotoByTitle(title: String!): Photo
     findPhotoByUploadUser(username: String!): Photo

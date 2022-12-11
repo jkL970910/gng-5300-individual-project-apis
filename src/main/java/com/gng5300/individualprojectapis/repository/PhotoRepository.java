@@ -17,4 +17,7 @@ public interface PhotoRepository extends MongoRepository<Photo, String> {
 
     @Query("{ 'uploadUser' :  ?0}")
     List<Photo> findByUploadUser(String uploadUser);
+
+    @Query(value = "{ 'id' :  ?0}", delete = true)
+    Photo deleteByPhotoId(String id);
 }

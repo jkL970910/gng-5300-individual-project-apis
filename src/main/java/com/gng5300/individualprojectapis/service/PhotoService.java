@@ -37,6 +37,28 @@ public class PhotoService {
         }
     }
 
+    public Photo deletePhotoByID(String photoID) {
+        try {
+            Photo deletePhoto = photoRepository.deleteByPhotoId(photoID);
+            User uploadUser = userRepository.findByUsername(deletePhoto.getUploadUser()).get(0);
+            HashSet<String> currentPhotos = uploadUser.getMyPhotos();
+            currentPhotos.remove(deletePhoto);
+            uploadUser.setMyPhotos(currentPhotos);
+            userRepository.save(uploadUser);
+            for (User user : userRepository.findAll()) {
+                HashSet<String> favoriteList = user.getLikedList();
+                if (favoriteList.contains(deletePhoto)) {
+                    favoriteList.remove(deletePhoto);
+                    user.setLikedList(favoriteList);
+                    userRepository.save(user);
+                }
+            }
+            return new Photo("Delete Photo Success", deletePhoto.getTitle(), deletePhoto.getUploadUser(), deletePhoto.getImgUrl(), deletePhoto.getImgLocal());
+        } catch (Exception e) {
+            return new Photo("Delete Photo Error", e.toString(), "", "", "");
+        }
+    }
+
     public Photo updatePhoto(String photoId, String photoTitle, String description, String imgUrl, String imgLocal) {
         try {
             Photo updatePhoto = findPhotoByID(photoId);
