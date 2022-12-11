@@ -39,8 +39,8 @@ public class UserController {
     }
 
     @MutationMapping
-    public User likePhoto(@Argument String username, @Argument String photoTitle) {
-        return userService.addLikedPhoto(username, photoTitle);
+    public User likePhoto(@Argument String username, @Argument String photoID) {
+        return userService.addLikedPhoto(username, photoID);
     }
 
     @MutationMapping
