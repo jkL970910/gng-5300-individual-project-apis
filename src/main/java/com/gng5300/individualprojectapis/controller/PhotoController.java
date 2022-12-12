@@ -39,8 +39,8 @@ public class PhotoController {
     }
 
     @MutationMapping
-    public Photo deletePhoto(@Argument String id) {
-        return photoService.deletePhotoByID(id);
+    public Photo deletePhoto(@Argument String photoId) {
+        return photoService.deletePhotoByID(photoId);
     }
 
     @MutationMapping

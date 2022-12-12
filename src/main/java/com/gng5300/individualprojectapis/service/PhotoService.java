@@ -42,13 +42,13 @@ public class PhotoService {
             Photo deletePhoto = photoRepository.deleteByPhotoId(photoID);
             User uploadUser = userRepository.findByUsername(deletePhoto.getUploadUser()).get(0);
             HashSet<String> currentPhotos = uploadUser.getMyPhotos();
-            currentPhotos.remove(deletePhoto);
+            currentPhotos.remove(photoID);
             uploadUser.setMyPhotos(currentPhotos);
             userRepository.save(uploadUser);
             for (User user : userRepository.findAll()) {
                 HashSet<String> favoriteList = user.getLikedList();
-                if (favoriteList.contains(deletePhoto)) {
-                    favoriteList.remove(deletePhoto);
+                if (favoriteList.contains(photoID)) {
+                    favoriteList.remove(photoID);
                     user.setLikedList(favoriteList);
                     userRepository.save(user);
                 }
