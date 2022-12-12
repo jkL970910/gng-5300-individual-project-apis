@@ -58,7 +58,9 @@ public class UserService {
         try {
             User user = userRepository.findByUsername(username).get(0);
             HashSet<String> curLikedPhotoList = user.getLikedList();
-            curLikedPhotoList.remove(photoId);
+            if (curLikedPhotoList.contains(photoId)) {
+                curLikedPhotoList.remove(photoId);
+            }
             user.setLikedList(curLikedPhotoList);
             userRepository.save(user);
             return user;

@@ -44,7 +44,7 @@ public class UserController {
     }
 
     @MutationMapping
-    public User unLikePhoto(@Argument String username, @Argument String photoTitle) {
-        return userService.removeLikedPhoto(username, photoTitle);
+    public User unLikePhoto(@Argument String username, @Argument String photoID) {
+        return userService.removeLikedPhoto(username, photoID);
     }
 }
