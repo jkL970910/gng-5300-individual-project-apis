@@ -2,6 +2,7 @@ type Query {
     getAllUser: [User]
     getAllPhotos: [Photo]
     getLikePhotoList(username: String!): [Photo]
+    getUserPhotoList(username: String!): [Photo]
     getUserByUsername(username: String!): User
     userLogin(username: String!, password: String!): User
 }

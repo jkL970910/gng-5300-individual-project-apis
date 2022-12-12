@@ -87,8 +87,23 @@ public class PhotoService {
             }
             return likeList;
         } catch (Exception e) {
-            likeList.add(new Photo("Update Photo Error", e.toString(), "", "", ""));
+            likeList.add(new Photo("Get Liked Photo List Error", e.toString(), "", "", ""));
             return likeList;
+        }
+    }
+
+    public List<Photo> getUserPhotoList(String username) {
+        List<Photo> userList = new ArrayList<>();
+        try {
+            User user = userRepository.findByUsername(username).get(0);
+            HashSet<String> currentLikedList = user.getMyPhotos();
+            for (String photoID : currentLikedList) {
+                userList.add(findPhotoByID(photoID));
+            }
+            return userList;
+        } catch (Exception e) {
+            userList.add(new Photo("Get User Photo List Error", e.toString(), "", "", ""));
+            return userList;
         }
     }
 

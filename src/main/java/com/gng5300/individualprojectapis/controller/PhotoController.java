@@ -28,6 +28,11 @@ public class PhotoController {
         return photoService.getLikePhotoList(username);
     }
 
+    @QueryMapping
+    public List<Photo> getUserPhotoList(@Argument String username) {
+        return photoService.getUserPhotoList(username);
+    }
+
     @MutationMapping
     public Photo uploadPhoto(@Argument String username, @Argument String photoTitle, @Argument String description, @Argument String imgUrl, @Argument String imgLocal) {
         return photoService.uploadPhoto(username, photoTitle, description, imgUrl, imgLocal);
